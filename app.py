@@ -9,86 +9,140 @@ st.set_page_config(
 
 st.markdown(
     """
-    <style>
-    .stApp {
-        position: fixed;
-        height: 100vh;
-        overflow: hidden;
-        background: linear-gradient(135deg, #0f172a, #1f2937);
-        color: #e5e7eb;
-    }
+<style>
 
-    .title-text {
-        font-size: 2.3rem;
-        font-weight: 700;
-        color: #f9fafb;
-        text-align: center;
-        margin-bottom: 0.25rem;
-    }
 
-    .subtitle-text {
-        font-size: 0.95rem;
-        color: #9ca3af;
-        text-align: center;
-        margin-bottom: 1rem;
-    }
+html, body, [data-testid="stAppViewContainer"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100%;
+}
 
-    .card {
-        background-color: #111827;
-        border-radius: 12px;
-        padding: 1.0rem 1.8rem 1.5rem 1.8rem;
-        box-shadow: 0 18px 45px rgba(0,0,0,0.35);
-        border: 1px solid #1f2937;
-    }
+.stApp {
+    background: linear-gradient(135deg, #0f172a, #1f2937) !important;
+    color: #e5e7eb !important;
+}
 
-    .result-wrapper > div {
-        margin-top: 0.25rem !important;
-        margin-bottom: 0.5rem !important;
-    }
 
-    textarea {
-        border-radius: 8px !important;
-        border: 1px solid #4b5563 !important;
-        background-color: #020617 !important;
-        color: #e5e7eb !important;
-        font-size: 0.95rem !important;
-    }
+.title-text {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #f9fafb !important;
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
 
-    .stForm button[kind="primary"] {
-        border-radius: 999px;
-        background: linear-gradient(135deg, #22c55e, #16a34a);
-        color: white;
-        font-weight: 600;
-        border: none;
-    }
+.subtitle-text {
+    font-size: 0.95rem;
+    color: #9ca3af !important;
+    text-align: center;
+    margin-bottom: 1rem;
+}
 
-    .stForm button[kind="primary"]:hover {
-        filter: brightness(1.05);
-    }
 
-    
-    .app-footer {
-        position: fixed;
-        bottom: 8px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        font-size: 0.8rem;
-        color: white;
-        pointer-events: none;
-    }
+.card {
+    background-color: #111827 !important;
+    border-radius: 12px;
+    padding: 1rem 1.8rem 1.5rem;
+    border: 1px solid #1f2937;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+}
 
-    .app-footer span {
-        background: rgba(15, 23, 42, 0.8);
-        padding: 4px 10px;
-        border-radius: 999px;
-        border: 1px solid #374151;
-        pointer-events: auto;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
+
+textarea, 
+[data-testid="stTextArea"] textarea {
+    background-color: #020617 !important;
+    color: #e5e7eb !important;
+    border-radius: 8px !important;
+    border: 1px solid #4b5563 !important;
+    font-size: 0.95rem !important;
+}
+textarea::placeholder,
+input::placeholder {
+    color: #9ca3af !important;
+    opacity: 1 !important;   /* Firefox fix */
+}
+
+
+textarea::-moz-placeholder,
+input::-moz-placeholder {
+    color: #9ca3af !important;
+    opacity: 1 !important;
+}
+
+
+textarea:-ms-input-placeholder,
+input:-ms-input-placeholder {
+    color: #9ca3af !important;
+}
+
+
+textarea::-webkit-input-placeholder,
+input::-webkit-input-placeholder {
+    color: #9ca3af !important;
+}
+
+
+label, 
+[data-testid="stWidgetLabel"] {
+    color: #e5e7eb !important;
+    font-weight: 500;
+}
+
+
+button,
+.stForm button,
+[data-testid="baseButton-primary"],
+[data-testid="baseButton-secondary"] {
+     background: linear-gradient(135deg, #064e3b, #022c22) !important;
+    color: white !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    border: none !important;
+    padding: 0.6rem 1.2rem !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+button:hover {
+    filter: brightness(1.05);
+}
+
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Clear button */
+[data-testid="baseButton-secondary"] {
+    background: #1f2937 !important;
+    border: 1px solid #374151 !important;
+}
+
+[data-testid="baseButton-secondary"]:hover {
+    background: #374151 !important;
+}
+
+/* ---------------- ALERTS ---------------- */
+[data-testid="stAlert"] {
+    background-color: #020617 !important;
+    border: 1px solid #374151 !important;
+    color: #e5e7eb !important;
+}
+
+/* ---------------- FOOTER ---------------- */
+.app-footer span {
+    background: rgba(15, 23, 42, 0.8);
+    color: white !important;
+    border-radius: 999px;
+    border: 1px solid #374151;
+}
+
+</style>
+""",
+unsafe_allow_html=True,
 )
+
 
 
 with open("spam_model.pkl", "rb") as f:
