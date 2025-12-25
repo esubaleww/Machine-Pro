@@ -1,4 +1,4 @@
-import streamlit as st  # type: ignore
+import streamlit as st  
 import pickle
 
 st.set_page_config(
@@ -36,14 +36,13 @@ st.markdown(
     .card {
         background-color: #111827;
         border-radius: 12px;
-        padding: 1.0rem 1.8rem 1.5rem 1.8rem;  /* slightly smaller top padding */
+        padding: 1.0rem 1.8rem 1.5rem 1.8rem;
         box-shadow: 0 18px 45px rgba(0,0,0,0.35);
         border: 1px solid #1f2937;
     }
 
-    /* Custom wrapper for the result to reduce top margin */
     .result-wrapper > div {
-        margin-top: 0.25rem !important;  /* pull the alert closer to the top */
+        margin-top: 0.25rem !important;
         margin-bottom: 0.5rem !important;
     }
 
@@ -66,12 +65,32 @@ st.markdown(
     .stForm button[kind="primary"]:hover {
         filter: brightness(1.05);
     }
+
+    
+    .app-footer {
+        position: fixed;
+        bottom: 8px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 0.8rem;
+        color: white;
+        pointer-events: none;
+    }
+
+    .app-footer span {
+        background: rgba(15, 23, 42, 0.8);
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid #374151;
+        pointer-events: auto;
+    }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-# --- Load model & vectorizer ---
+
 with open("spam_model.pkl", "rb") as f:
     model = pickle.load(f)
 with open("vectorizer.pkl", "rb") as f:
@@ -83,7 +102,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Initialize session state
 if "message" not in st.session_state:
     st.session_state.message = ""
 
@@ -93,7 +111,6 @@ def clear_message():
 with st.container():
     st.markdown('<div class="card">', unsafe_allow_html=True)
 
-    # Wrap the result placeholder in a div with a custom class
     st.markdown('<div class="result-wrapper">', unsafe_allow_html=True)
     result_placeholder = st.empty()
     st.markdown('</div>', unsafe_allow_html=True)
@@ -137,3 +154,13 @@ with st.container():
                 )
 
     st.markdown("</div>", unsafe_allow_html=True)
+
+
+st.markdown(
+    """
+    <div class="app-footer">
+        <span>Built by Group 2 members</span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
